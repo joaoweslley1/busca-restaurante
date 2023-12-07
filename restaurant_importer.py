@@ -1,11 +1,16 @@
 import csv
 from restaurant import Restaurant
 
-def restaurant_importer(path:str):
+def restaurant_importer(path:str=None):
     '''
     Função que importa os restaurantes de um arquivo csv.
+    Permite que um caminho seja passado.
     O arquivo precisa está no formato: "name,customer_rating,distance,price,cuisine_id"
     '''
+
+    if not path:
+        path='./csv_files/restaurants.csv'
+
     restaurants = []
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')

@@ -1,9 +1,14 @@
 import csv
 
-def cuisine_importer(path:str):
+def cuisine_importer(path:str=None):
     '''
     Função que importa as cuisines de um arquivo csv.
+    Permite que um caminho seja passado.
     '''
+
+    if not path:
+        path='./csv_files/cuisines.csv' # caminho padrão
+
     cuisines=[]
     cuisines_id=[]
     with open(path) as csv_file:
