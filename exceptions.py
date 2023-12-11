@@ -32,3 +32,10 @@ class InvalidCuisineException(Exception):
     '''
     def __init__(self,message='Cuisine ID inválido, espera-se um valor presente no arquivo cuisines.csv'):
         super().__init__(message)
+
+class InvalidObjectTypeException(Exception):
+    '''
+    Exceção para caso objeto não seja um Restaurante.
+    '''
+    def __init__(self,message='O objeto precisa ser da classe Restaurant'):
+        super().__init__(message)
