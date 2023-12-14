@@ -63,7 +63,7 @@ class Results:
         while atual.prox and pos_atual < 5:
             atual=atual.prox
             print(atual)
-            pos_atual+=1    # garante que apenas os 5 primeiros irão ser filtrados
+            #pos_atual+=1    # garante que apenas os 5 primeiros irão ser filtrados
     
 
 
@@ -99,8 +99,15 @@ class Results:
             if not dist_atual:
                 dist_atual=r.distance
 
-            if i == len(sorted_restaurants)-1:
+            
+            if i == len(sorted_restaurants)-1 and r.distance == dist_atual:
+                rest_aux.append(r)
                 rest_aux=customer_rating_sort(rest_aux)
+                rest_final+=rest_aux
+                rest_aux=[]
+            elif i == len(sorted_restaurants)-1: 
+                rest_aux=customer_rating_sort(rest_aux)
+                rest_aux.append(r)
                 rest_final+=rest_aux
                 rest_aux=[]
             elif r.distance == dist_atual:
@@ -128,12 +135,18 @@ class Results:
             if not rating_atual:
                 rating_atual=r.customer_rating
 
-            if i == len(sorted_restaurants)-1:
+            if i == len(sorted_restaurants)-1 and r.customer_rating == rating_atual:
+                rest_aux.append(r)
                 rest_aux=price_sort(rest_aux)
                 rest_final+=rest_aux
-                rest_aux=[]
-            elif r.customer_rating == rating_atual:
+                rest_aux=[] 
+            elif i == len(sorted_restaurants)-1:
+                rest_aux=price_sort(rest_aux)
                 rest_aux.append(r)
+                rest_final+=rest_aux
+                rest_aux=[] 
+            elif r.customer_rating == rating_atual:
+                rest_aux.append(r)           
             else:
                 rest_aux=price_sort(rest_aux)
                 rest_final+=rest_aux
@@ -152,14 +165,13 @@ class Results:
 
 if __name__ == '__main__':
     from restaurant_importer import restaurant_importer
-    from restaurant_importer import restaurant_importer
     from filters import *
 
     restaurantes=restaurant_importer()  # importando os restaurantes
-    restaurantes=name_search('Kit',restaurantes)    # filtrando por nome
-    restaurantes=customer_rating_search(2,restaurantes) # filtrando por avaliação
+    #restaurantes=name_search('Kit',restaurantes)    # filtrando por nome
+    #restaurantes=customer_rating_search(2,restaurantes) # filtrando por avaliação
     restaurantes=price_search(30, restaurantes) # filtrando por preço
-    restaurantes=distance_search(10,restaurantes) # filtrando por distancia
+    restaurantes=distance_search(3,restaurantes) # filtrando por distancia
     #restaurantes=cuisine_id_search('KorEan',restaurantes) # filtrando pelo nome da cousine
 
     pilha=Results()
