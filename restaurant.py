@@ -68,6 +68,3 @@ class Restaurant():
         self.__cuisine_id=c
 
 
-if __name__ == '__main__':
-    restaurant=Restaurant('Restaurante Teste',5,5,10,6)
-    print(restaurant)
