@@ -119,5 +119,6 @@ else:
 
 print("\nComandos Selecionados:")
 for command in filters_list:
-        print(command)
-        print("\n")
+        print(command, "\n")
+
+        
