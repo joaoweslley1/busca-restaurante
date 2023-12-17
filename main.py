@@ -13,13 +13,6 @@ distance=None
 max_price=None
 cuisine_name=None
 
-def print_results(restaurants):
-    if not restaurants:
-        print("Nenhum restaurante encontrado.")
-    else:
-        for restaurant in restaurants:
-            print(restaurant)
-            print("-----")
 
 while True:
     print("======================================")
