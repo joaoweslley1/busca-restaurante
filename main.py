@@ -1,65 +1,81 @@
 from restaurant_importer import restaurant_importer
-from restaurant import *
 from filters import *
-from cuisine_importer import *
-caminho='./csv_files/restaurants.csv'
-restaurantes=restaurant_importer(caminho)
+from results import *
 
-
-def print_restaurants(restaurants):
-    if not restaurants:
-        print("Nenhum restaurante encontrado.")
-    else:
-        for restaurant in restaurants:
-            print(restaurant)
-            print("-----")
-
-def main():
-    print("\nSistema de busca de restaurantes!")
+print("\nSistema de busca de restaurantes!")
     
-    RESTAURANTS = restaurant_importer()
-    
-    selected_filters = []
+restaurants = restaurant_importer()
 
-    while True:
-        print("\nEscolha uma opção:")
-        print("1. Buscar por nome do restaurante")
-        print("2. Buscar por avaliação do cliente")
-        print("3. Buscar por distância")
-        print("4. Buscar por preço médio")
-        print("5. Buscar por tipo de cozinha")
-        print("0. Pesquisar")
+name=None
+rating=None
+distance=None
+max_price=None
+cuisine_name=None
 
-        option = input("Opção: ")
+while True:
+    print("======================================")
+    print("          Escolha uma opção:          ")
+    print("======================================")
+    print("[1] Buscar por nome do restaurante")
+    print("[2] Buscar por avaliação do cliente")
+    print("[3] Buscar por distância")
+    print("[4] Buscar por preço médio")
+    print("[5] Buscar por tipo de cozinha")
+    print("[R] Resetar")
+    print("[P] Pesquisar")
+    print("======================================")
 
-        if option == "0":
+    option = input("\n\nOpção: ")
+
+    if option.upper() == "P":
+        if not name and not rating and not distance and not max_price and not cuisine_name:
             break
-        elif option == "1":
-            restaurant_name = input("Digite o nome do restaurante: ")
-            selected_filters.append(lambda restaurants: name_search(restaurant_name, restaurants))
-        elif option == "2":
-            rating = int(input("Digite a avaliação mínima: "))
-            selected_filters.append(lambda restaurants: customer_rating_search(rating, restaurants))
-        elif option == "3":
-            distance = float(input("Digite a distância máxima: "))
-            selected_filters.append(lambda restaurants: distance_search(distance, restaurants))
-        elif option == "4":
-            max_price = float(input("Digite o preço máximo: "))
-            selected_filters.append(lambda restaurants: price_search(max_price, restaurants))
-        elif option == "5":
-            cuisine_name = input("Digite o nome da cozinha: ")
-            selected_filters.append(lambda restaurants: cuisine_id_search(cuisine_name, restaurants))
         else:
-            print("Opção inválida. Tente novamente.")
+            print("Filtros Selecionados:\n")
+            if name:
+                print('Nome: ',name)
+            if rating:
+                print('Rating: ', rating)
+            if distance:
+                print('Distãncia máxima: ', distance)
+            if max_price:
+                print('Preço máximo: ',max_price)
+            if cuisine_name:
+                print('Nome da cuisine: ', cuisine_name)
+            print('')
+            print('Realizar pesquisa? [S/n]')
+            option=input()
+            if option == '' or option.upper() == 'S':
+                break
+            elif option.upper() == 'N':
+                continue
+            else:
+                print('Opção inválida!')
+    elif option.upper() == "R":
+        restaurants=restaurant_importer()
+    elif option == "1":
+        name=input("Digite o nome do restaurante: ")
+        restaurants=name_search(name,restaurants)
+    elif option == "2":
+        rating=int(input("Digite a avaliação mínima: "))
+        restaurants=customer_rating_search(rating,restaurants)
+    elif option == "3":
+        distance=float(input("Digite a distância máxima: "))
+        restaurants=distance_search(distance,restaurants)
+    elif option == "4":
+        max_price=float(input("Digite o preço máximo: "))
+        restaurants=price_search(max_price,restaurants)
+    elif option == "5":
+        cuisine_name=input("Digite o nome da cozinha: ")
+        restaurants=cuisine_id_search(cuisine_name,restaurants)
+    else:
+        print("Opção inválida. Tente novamente.")
 
-    
-    filtered_restaurants = RESTAURANTS
-    for selected_filter in selected_filters:
-        filtered_restaurants = selected_filter(filtered_restaurants)
+results=Results()
 
-    print("\nResultados da busca:")
-    print_restaurants(filtered_restaurants)
+results.list_to_result(restaurants)
 
-
-if __name__ == "__main__":
-    main()
+if not name and not rating and not distance and not max_price and not cuisine_name:
+    results.list()
+else:
+    results.list(False)

@@ -53,8 +53,15 @@ class Results:
 
 
 
-    def list(self):
-        if not self.topo: return 'lista vazia'
+    def list(self,list_all=True):
+        '''
+        Lista os resultados obtidos;
+        Possui o parametro list_all este que caso verdadeiro faz com que seja listados
+        todos os resultados obtidos para o caso do usuário não ter passado nenhum filtro, 
+        caso contrário, imprime apnenas os 5 primeiros.
+        '''
+        if not self.topo:
+            return 'lista vazia'
 
         atual=self.topo
         pos_atual=1
@@ -63,8 +70,10 @@ class Results:
         while atual.prox and pos_atual < 5:
             atual=atual.prox
             print(atual)
-            #pos_atual+=1    # garante que apenas os 5 primeiros irão ser filtrados
-    
+            if not list_all:    # imprime todos caso não haja filtro
+                pos_atual+=1    # garante que apenas os 5 primeiros irão ser filtrados
+
+        return None
 
 
     def __add(self,no:'No'):
@@ -157,7 +166,7 @@ class Results:
         # armazenando os resultados obtidos
         sorted_restaurants=rest_final
         
-
+        # retornando os resultados
         return sorted_restaurants
 
 
@@ -168,9 +177,9 @@ if __name__ == '__main__':
     from filters import *
 
     restaurantes=restaurant_importer()  # importando os restaurantes
-    #restaurantes=name_search('Kit',restaurantes)    # filtrando por nome
+    restaurantes=name_search('Kit',restaurantes)    # filtrando por nome
     #restaurantes=customer_rating_search(2,restaurantes) # filtrando por avaliação
-    restaurantes=price_search(30, restaurantes) # filtrando por preço
+    #restaurantes=price_search(30, restaurantes) # filtrando por preço
     restaurantes=distance_search(3,restaurantes) # filtrando por distancia
     #restaurantes=cuisine_id_search('KorEan',restaurantes) # filtrando pelo nome da cousine
 
@@ -178,4 +187,4 @@ if __name__ == '__main__':
 
     pilha.list_to_result(restaurantes)
     
-    pilha.list()
+    pilha.list(False)

@@ -1,8 +1,8 @@
-# name=None,customer_rating=None,distance=None,price=None,cuisine_id=None
-
 def name_sort(restaurants:list):
     '''
-    
+    Mecanismo de orednação baseado no nome do restaurante;
+    Utiliza o método quicksort, utilizando como pivô o primeiro elemento da lista
+    e em seguida realiza a ordenação baseada na propriedade name do restaurante. 
     '''
 
     if len(restaurants) <= 1: return restaurants
@@ -14,7 +14,9 @@ def name_sort(restaurants:list):
 
 def customer_rating_sort(restaurants:list):
     '''
-    
+    Mecanismo de orednação baseado na avaliação dos clientes do restaurante;
+    Utiliza o método quicksort, utilizando como pivô o primeiro elemento da lista
+    e em seguida realiza a ordenação baseada na propriedade customer_rating do restaurante. 
     '''
 
     if len(restaurants) <= 1: return restaurants
@@ -27,7 +29,9 @@ def customer_rating_sort(restaurants:list):
 
 def distance_sort(restaurants:list):
     '''
-    
+    Mecanismo de orednação baseado na distância até o restaurante;
+    Utiliza o método quicksort, utilizando como pivô o primeiro elemento da lista
+    e em seguida realiza a ordenação baseada na propriedade distance do restaurante. 
     '''
     if len(restaurants) <= 1: return restaurants
     pivo = restaurants[0]
@@ -39,7 +43,9 @@ def distance_sort(restaurants:list):
 
 def price_sort(restaurants:list):
     '''
-    
+    Mecanismo de orednação baseado no preço médio do restaurante;
+    Utiliza o método quicksort, utilizando como pivô o primeiro elemento da lista
+    e em seguida realiza a ordenação baseada na propriedade price do restaurante. 
     '''
 
     if len(restaurants) <= 1: return restaurants
