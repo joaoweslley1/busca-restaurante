@@ -11,7 +11,6 @@ Projeto final da disciplina de Programação e Estrutura de Dados do curso Redes
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Funcionalidades Principais](#funcionalidades-principais)
 - [Gestão de Erros e Exceções](#gestão-de-erros-e-exceções)
-- [Contribuições e Colaboradores](#contribuições-e-colaboradores)
 
 ## Visão Geral
 
