@@ -109,9 +109,9 @@ if not name and not rating and not distance and not max_price and not cuisine_na
 else:
     results.list(False)
 
-
-print("\nComandos Selecionados:")
-for command in filters_list:
-        print(command, "\n")
+if filters_list != []:
+    print("\nComandos Selecionados:")
+    for command in filters_list:
+            print(command, "\n")
 
         

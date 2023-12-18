@@ -61,7 +61,8 @@ class Results:
         caso contrário, imprime apnenas os 5 primeiros.
         '''
         if not self.topo:
-            return 'lista vazia'
+            print('Nenhum resultado encontrado')
+            return None
 
         atual=self.topo
         pos_atual=1
@@ -91,7 +92,7 @@ class Results:
 
     def __sorting(self,restaurants):
         '''
-        Método privado que ordena a lista após cada adicão de um novo nó 
+        Método privado que ordena a lista antes de listar os resultados
         '''
 
         # ordena por distância
@@ -173,15 +174,16 @@ class Results:
 
 
 if __name__ == '__main__':
+
     from restaurant_importer import restaurant_importer
     from filters import *
 
     restaurantes=restaurant_importer()  # importando os restaurantes
-    restaurantes=name_search('Kit',restaurantes)    # filtrando por nome
-    #restaurantes=customer_rating_search(2,restaurantes) # filtrando por avaliação
-    #restaurantes=price_search(30, restaurantes) # filtrando por preço
+    restaurantes=name_search('Terrax',restaurantes)    # filtrando por nome
+    restaurantes=customer_rating_search(2,restaurantes) # filtrando por avaliação
+    restaurantes=price_search(30, restaurantes) # filtrando por preço
     restaurantes=distance_search(3,restaurantes) # filtrando por distancia
-    #restaurantes=cuisine_id_search('KorEan',restaurantes) # filtrando pelo nome da cousine
+    restaurantes=cuisine_id_search('Kor',restaurantes) # filtrando pelo nome da cousine
 
     pilha=Results()
 

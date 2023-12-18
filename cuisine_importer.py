@@ -4,6 +4,7 @@ def cuisine_importer(path:str=None):
     '''
     Função que importa as cuisines de um arquivo csv.
     Permite que um caminho seja passado.
+    O arquivo precisa está no formato: "id,name"
     '''
 
     if not path:
